@@ -1,0 +1,6 @@
+/bin
+/pkg
+*.swp
+config.json
+config.json.template
+
