@@ -146,9 +146,12 @@ func onPeriphConnected(p gatt.Peripheral, err error) {
 	fmt.Println("Connected ", p.ID())
 	defer p.Device().CancelConnection(p)
 
-	// reset profile
+	// reset connection specific parameters
 	connParam.profile = defProfile
-	connParam.count = defCount
+	connParam.count = make(map[string]int)
+	for s, c := range defCount {
+		connParam.count[s] = c
+	}
 
 	if err := p.SetMTU(500); err != nil {
 		fmt.Printf("Failed to set MTU, err: %s\n", err)
